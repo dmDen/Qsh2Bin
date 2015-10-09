@@ -17,6 +17,8 @@
 			<RowDefinition Height="5"/>
 			<RowDefinition Height="25"/>
 			<RowDefinition Height="5"/>
+			<RowDefinition Height="25"/>
+			<RowDefinition Height="5"/>
 			<RowDefinition />
 		</Grid.RowDefinitions>
 
@@ -26,9 +28,12 @@
 		<Label Grid.Column="0" Grid.Row="2">Директория S#:</Label>
 		<ex:FolderBrowserPicker x:Name="StockSharpFolder" Grid.Column="1" Grid.Row="2" FolderChange="OnFolderChange" />
 
-		<ComboBox x:Name="Format" Grid.Column="0" Grid.Row="4"></ComboBox>
-		<Button x:Name="Convert" IsEnabled="False" Grid.Row="4" Grid.Column="1" Width="100" Click="Convert_OnClick">Запустить</Button>
+		<Label Grid.Column="0" Grid.Row="4">Количество потоков:</Label>
+		<TextBox x:Name="TextBoxThreadsCount" Grid.Row="4" Grid.Column="1" >1</TextBox>
 
-		<xaml:LogControl x:Name="LogControl" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" />
+		<ComboBox x:Name="Format" Grid.Column="0" Grid.Row="6"></ComboBox>
+		<Button x:Name="Convert" IsEnabled="False" Grid.Row="6" Grid.Column="1" Width="100" Click="Convert_OnClick">Запустить</Button>
+
+		<xaml:LogControl x:Name="LogControl" Grid.Row="8" Grid.ColumnSpan="2" Grid.Column="0" />
 	</Grid>
 </Window>

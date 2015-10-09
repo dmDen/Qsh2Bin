@@ -1,6 +1,7 @@
 ﻿namespace StockSharp.Qsh2Bin
 {
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
@@ -34,6 +35,7 @@
 			public string QshFolder { get; set; }
 			public string StockSharpFolder { get; set; }
 			public StorageFormats Format { get; set; }
+			public int ThreadsCount { get; set; }
 		}
 
 		private readonly SecurityIdGenerator _idGenerator = new SecurityIdGenerator();
@@ -65,6 +67,7 @@
 					QshFolder.Folder = settings.QshFolder;
 					StockSharpFolder.Folder = settings.StockSharpFolder;
 					Format.SetSelectedValue<StorageFormats>(settings.Format);
+					TextBoxThreadsCount.Text = settings.ThreadsCount.ToString();
 				}
 
 				if (File.Exists(_convertedFilesFile))
@@ -98,7 +101,8 @@
 			{
 				QshFolder = QshFolder.Folder,
 				StockSharpFolder = StockSharpFolder.Folder,
-				Format = Format.GetSelectedValue<StorageFormats>() ?? StorageFormats.Binary
+				Format = Format.GetSelectedValue<StorageFormats>() ?? StorageFormats.Binary,
+				ThreadsCount = int.Parse(TextBoxThreadsCount.Text),
 			};
 
 			try
@@ -121,7 +125,7 @@
 					Convert.IsEnabled = true;
 				});
 
-				ConvertDirectory(settings.QshFolder, registry, settings.Format, ExchangeBoard.Forts /* TODO надо сделать выбор в GUI */);
+				ConvertDirectory(settings.QshFolder, registry, settings.Format, ExchangeBoard.Forts, settings.ThreadsCount /* TODO надо сделать выбор в GUI */);
 			})
 			.ContinueWith(t =>
 			{
@@ -143,6 +147,8 @@
 					return;
 				}
 
+				_logManager.Application.AddInfoLog("Конвертация {0}.".Put(_isStarted ? "выполнена" : "остановлена"));
+
 				new MessageBoxBuilder()
 					.Text("Конвертация {0}.".Put(_isStarted ? "выполнена" : "остановлена"))
 					.Owner(this)
@@ -151,13 +157,45 @@
 			}, TaskScheduler.FromCurrentSynchronizationContext());
 		}
 
-		private void ConvertDirectory(string path, IStorageRegistry registry, StorageFormats format, ExchangeBoard board)
+
+		private void GetFilesInDirectory(string path, Queue<string> queue)
+		{
+			foreach (var filePath in Directory.GetFiles(path, "*.qsh"))
+			{
+				queue.Enqueue(filePath);
+			}
+			foreach (var dir in Directory.GetDirectories(path))
+			{
+				GetFilesInDirectory(dir, queue);
+			}
+		}
+
+		private void ConvertDirectory(string path, IStorageRegistry registry, StorageFormats format, ExchangeBoard board, int threadsCount)
 		{
 			if (!_isStarted)
 				return;
-
-			Directory.GetFiles(path, "*.qsh").ForEach(f => ConvertFile(f, registry, format, board));
-			Directory.GetDirectories(path).ForEach(d => ConvertDirectory(d, registry, format, board));
+			Queue<string> queueFiles = new Queue<string>();
+			GetFilesInDirectory(path, queueFiles);
+			Task[] tasks = new Task[threadsCount];
+			for (int i = 0; i < threadsCount; i++)
+			{
+				Task task = Task.Factory.StartNew(() =>
+				{
+					while (true)
+					{
+						string fileName;
+						lock (((ICollection)queueFiles).SyncRoot)
+						{
+							if (queueFiles.Count == 0)
+								return;
+							fileName = queueFiles.Dequeue();
+						}
+						ConvertFile(fileName, registry, format, board);
+					}
+				});
+				tasks[i] = task;
+			}
+			Task.WaitAll(tasks);
 		}
 
 		private void ConvertFile(string fileName, IStorageRegistry registry, StorageFormats format, ExchangeBoard board)
@@ -170,7 +208,7 @@
 			if (_convertedFiles.Contains(fileNameKey))
 				return;
 
-			_logManager.Application.AddInfoLog("Конвертация файла {0}.", fileName);
+			_logManager.Application.AddInfoLog("Конвертация файла начата {0}.", fileName);
 
 			const int maxBufCount = 1000;
 
@@ -441,9 +479,12 @@
 					registry.GetOrderLogMessageStorage(pair.Key, format: format).Save(pair.Value.Item4);
 				}
 			}
-
-			File.AppendAllLines(_convertedFilesFile, new[] { fileNameKey });
-			_convertedFiles.Add(fileNameKey);
+			lock (_convertedFilesFile)
+			{
+				File.AppendAllLines(_convertedFilesFile, new[] { fileNameKey });
+				_convertedFiles.Add(fileNameKey);
+			}
+			_logManager.Application.AddInfoLog("Конвертация файла закончена {0}.", fileName);
 		}
 
 		private Security GetSecurity(QScalp.Security security, ExchangeBoard board)
