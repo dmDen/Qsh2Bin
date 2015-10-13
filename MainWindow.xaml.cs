@@ -174,23 +174,28 @@
 		{
 			if (!_isStarted)
 				return;
-			Queue<string> queueFiles = new Queue<string>();
-			GetFilesInDirectory(path, queueFiles);
+			FilesTasker fileTasker = new FilesTasker();
+			fileTasker.InitFiles(path);
+
 			Task[] tasks = new Task[threadsCount];
 			for (int i = 0; i < threadsCount; i++)
 			{
 				Task task = Task.Factory.StartNew(() =>
 				{
 					while (true)
-					{
-						string fileName;
-						lock (((ICollection)queueFiles).SyncRoot)
+					{					
+						FileInfoStruct fis = fileTasker.GetNextFile();
+						if (fis.FullFileName == "wait")
 						{
-							if (queueFiles.Count == 0)
-								return;
-							fileName = queueFiles.Dequeue();
+							System.Threading.Thread.Sleep(20000);
+							continue;
 						}
-						ConvertFile(fileName, registry, format, board);
+						else if (fis.FullFileName == "stop")
+						{
+							return;
+						}
+						ConvertFile(fis.FullFileName, registry, format, board);
+						fileTasker.ReportEndFileHandling(fis);
 					}
 				});
 				tasks[i] = task;

@@ -44,6 +44,15 @@
     <ApplicationIcon>Properties\stocksharp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ActiproSoftware.Docking.Wpf">
+      <HintPath>References\ActiproSoftware.Docking.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Navigation.Wpf">
+      <HintPath>References\ActiproSoftware.Navigation.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiproSoftware.Shared.Wpf">
+      <HintPath>References\ActiproSoftware.Shared.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Ecng.Collections, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Ecng.Collections.dll</HintPath>
@@ -110,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FilesTasker.cs" />
     <Compile Include="QScalp\DataTypes.cs" />
     <Compile Include="QScalp\Internals\DateTimeHelper.cs" />
     <Compile Include="QScalp\Internals\Flags.cs" />
