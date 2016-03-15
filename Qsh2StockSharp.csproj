@@ -114,6 +114,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConvertTargets.cs" />
     <Compile Include="QScalp\DataTypes.cs" />
     <Compile Include="QScalp\Internals\DateTimeHelper.cs" />
     <Compile Include="QScalp\Internals\Flags.cs" />

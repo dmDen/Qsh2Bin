@@ -35,6 +35,7 @@
 			public string QshFolder { get; set; }
 			public string StockSharpFolder { get; set; }
 			public StorageFormats Format { get; set; }
+			public ConvertTargets ConvertTarget { get; set; }
 			public string Board { get; set; }
 			public string SecurityLike { get; set; }
 		}
@@ -61,6 +62,9 @@
 			Format.SetDataSource<StorageFormats>();
 			Format.SetSelectedValue<StorageFormats>(StorageFormats.Binary);
 
+			ConvertTargetComboBox.SetDataSource<ConvertTargets>();
+			ConvertTargetComboBox.SetSelectedValue<ConvertTargets>(ConvertTargets.OrderLog);
+
 			Board.Boards.AddRange(ExchangeBoard.EnumerateExchangeBoards().Where(b => b.Exchange == Exchange.Moex));
             Board.SelectedBoard = ExchangeBoard.Forts;
 
@@ -73,6 +77,7 @@
 					QshFolder.Folder = settings.QshFolder;
 					StockSharpFolder.Folder = settings.StockSharpFolder;
 					Format.SetSelectedValue<StorageFormats>(settings.Format);
+					ConvertTargetComboBox.SetSelectedValue<ConvertTargets>(settings.ConvertTarget);
 					SecurityLike.Text = settings.SecurityLike;
 					Board.SelectedBoard =
 						settings.Board.IsEmpty()
@@ -104,6 +109,7 @@
 				QshFolder = QshFolder.Folder,
 				StockSharpFolder = StockSharpFolder.Folder,
 				Format = Format.GetSelectedValue<StorageFormats>() ?? StorageFormats.Binary,
+				ConvertTarget = ConvertTargetComboBox.GetSelectedValue<ConvertTargets>() ?? ConvertTargets.OrderLog,
 				SecurityLike = SecurityLike.Text,
 				Board = Board.SelectedBoard?.Code
 			};
@@ -155,7 +161,7 @@
 					Convert.IsEnabled = true;
 				});
 
-				ConvertDirectory(settings.QshFolder, registry, settings.Format, board, settings.SecurityLike);
+				ConvertDirectory(settings.QshFolder, registry, settings.ConvertTarget, settings.Format, board, settings.SecurityLike);
 			})
 			.ContinueWith(t =>
 			{
@@ -185,21 +191,21 @@
 			}, TaskScheduler.FromCurrentSynchronizationContext());
 		}
 
-		private void ConvertDirectory(string path, IStorageRegistry registry, StorageFormats format, ExchangeBoard board, string securityLike)
+		private void ConvertDirectory(string path, IStorageRegistry registry, ConvertTargets convertTarget, StorageFormats format, ExchangeBoard board, string securityLike)
 		{
 			if (!_isStarted)
 				return;
 
-			Directory.GetFiles(path, "*.qsh").ForEach(f => ConvertFile(f, registry, format, board, securityLike));
-			Directory.GetDirectories(path).ForEach(d => ConvertDirectory(d, registry, format, board, securityLike));
+			Directory.GetFiles(path, "*.qsh").ForEach(f => ConvertFile(f, registry, convertTarget, format, board, securityLike));
+			Directory.GetDirectories(path).ForEach(d => ConvertDirectory(d, registry, convertTarget, format, board, securityLike));
 		}
 
-		private void ConvertFile(string fileName, IStorageRegistry registry, StorageFormats format, ExchangeBoard board, string securityLike)
+		private void ConvertFile(string fileName, IStorageRegistry registry, ConvertTargets convertTarget, StorageFormats format, ExchangeBoard board, string securityLike)
 		{
 			if (!_isStarted)
 				return;
 
-			var fileNameKey = format + "_" + fileName;
+			var fileNameKey = convertTarget + "_" + format + "_" + fileName;
 
 			if (_convertedFiles.Contains(fileNameKey))
 				return;

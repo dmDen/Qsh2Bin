@@ -25,20 +25,26 @@
 
         <Label Grid.Column="0" Grid.Row="2">S#:</Label>
 		<ex:FolderBrowserPicker x:Name="StockSharpFolder" Grid.Column="1" Grid.Row="2" FolderChange="OnFolderChange" />
-
-		<ComboBox x:Name="Format" Grid.Column="0" Grid.Row="4"></ComboBox>
-		
-        <Grid Grid.Row="4" Grid.Column="1">
+				
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="100"/>                
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-			
-			<xaml:ExchangeBoardComboBox x:Name="Board" SelectionChanged="Board_OnSelectionChanged" />
-			<TextBox x:Name="SecurityLike" Grid.Column="2" />
-            <Button x:Name="Convert" IsEnabled="False" Grid.Column="3" Width="100" Click="Convert_OnClick">Запустить</Button>
+            <ComboBox x:Name="ConvertTargetComboBox" Grid.Column="0" Height="25" VerticalAlignment="Bottom"></ComboBox>
+            <ComboBox x:Name="Format" Grid.Column="2"></ComboBox>
+            <xaml:ExchangeBoardComboBox x:Name="Board" Grid.Column="4"  SelectionChanged="Board_OnSelectionChanged" />
+            <TextBox x:Name="SecurityLike" Grid.Column="6" />
+            <Button x:Name="Convert" IsEnabled="False" Grid.Column="8" Width="100" Click="Convert_OnClick">Запустить</Button>
+
         </Grid>
 
 		<xaml:LogControl x:Name="LogControl" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" />
