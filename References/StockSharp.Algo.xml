@@ -486,6 +486,359 @@
             A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
             </returns>
         </member>
+        <member name="P:StockSharp.Algo.Export.Database.DbProviders.BaseDbProvider.CheckUnique">
+            <summary>
+            To check uniqueness of data in the database. It effects performance.
+            </summary>
+        </member>
+        <member name="T:StockSharp.Algo.Export.BaseExporter">
+            <summary>
+            The base class of export.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String)">
+            <summary>
+            Initialize <see cref="T:StockSharp.Algo.Export.BaseExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="path">The path to file.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Export.BaseExporter.Security">
+            <summary>
+            Security.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Export.BaseExporter.Arg">
+            <summary>
+            The data parameter.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Export.BaseExporter.Path">
+            <summary>
+            The path to file.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Type,System.Collections.IEnumerable)">
+            <summary>
+            To export values.
+            </summary>
+            <param name="dataType">Market data type.</param>
+            <param name="values">Value.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.CanProcess(System.Int32)">
+            <summary>
+            Is it possible to continue export.
+            </summary>
+            <param name="exported">The number of exported elements from previous call of the method.</param>
+            <returns><see langword="true" />, if export can be continued, otherwise, <see langword="false" />.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Export.StockSharpExporter">
+            <summary>
+            The export into the StockSharp format.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.StockSharpExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="drive">Storage.</param>
+            <param name="format">Format type.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Export.StockSharpExporter.BatchSize">
+            <summary>
+            The size of transmitted data package. The default is 50 elements.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.StockSharpExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Export.DatabaseExporter">
+            <summary>
+            The export into database.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},Ecng.Xaml.Database.DatabaseConnectionPair)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.DatabaseExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="connection">The connection to DB.</param>
+        </member>
+        <member name="P:StockSharp.Algo.Export.DatabaseExporter.BatchSize">
+            <summary>
+            The size of transmitted data package. The default is 50 elements.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Export.DatabaseExporter.CheckUnique">
+            <summary>
+            To check uniqueness of data in the database. It effects performance. The default is enabled.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Export.ExcelExporter">
+            <summary>
+            The export into Excel.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String,System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.ExcelExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="fileName">The path to file.</param>
+            <param name="breaked">The processor, which will be called if maximal value of strings is exceeded.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Export.TextExporter">
+            <summary>
+            The export into text file.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.TextExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="fileName">The path to file.</param>
+            <param name="template">The string formatting template.</param>
+            <param name="header">Header at the first line. Do not add header while empty string.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="T:StockSharp.Algo.Export.XmlExporter">
+            <summary>
+            The export into xml.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.XmlExporter"/>.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="arg">The data parameter.</param>
+            <param name="isCancelled">The processor, returning export interruption sign.</param>
+            <param name="fileName">The path to file.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
+            <summary>
+            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
+            </summary>
+            <param name="messages">Messages.</param>
+        </member>
         <member name="T:StockSharp.Algo.FilterableSecurityProvider">
             <summary>
             Provider of information about instruments supporting search using <see cref="T:StockSharp.Algo.SecurityTrie"/>.
@@ -2273,7 +2626,7 @@
             The trend direction.
             </summary>
         </member>
-        <member name="P:StockSharp.Algo.Indicators.NickRypockTrailingReverse.Мultiple">
+        <member name="P:StockSharp.Algo.Indicators.NickRypockTrailingReverse.Multiple">
             <summary>
             Multiplication factor.
             </summary>
@@ -5447,6 +5800,104 @@
             <param name="sourceDrive">The initial storage of market-data.</param>
             <param name="cacheDrive">The cache-storage of market-data.</param>
         </member>
+        <member name="T:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1">
+            <summary>
+            The cached aggregator-storage, allowing to load data simultaneously from several market data storages.
+            </summary>
+            <typeparam name="T">Message type.</typeparam>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.InnerStorages">
+            <summary>
+            Embedded storages of market data.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.Boards">
+            <summary>
+            List of all exchange boards, for which instruments are loaded.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.MessageCount">
+            <summary>
+            Message queue count.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.MaxMessageCount">
+            <summary>
+            Max message queue count.
+            </summary>
+            <remarks>
+            The default value is -1, which corresponds to the size without limitations.
+            </remarks>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.StartDate">
+            <summary>
+            Date in history for starting the paper trading.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.StopDate">
+            <summary>
+            Date in history to stop the paper trading (date is included).
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.PostTradeMarketTimeChangedCount">
+            <summary>
+            The number of the event <see cref="E:StockSharp.BusinessEntities.IConnector.MarketTimeChanged"/> calls after end of trading. By default it is equal to 2.
+            </summary>
+            <remarks>
+            It is required for activation of post-trade rules (rules, basing on events, occurring after end of trading).
+            </remarks>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.MarketTimeChangedInterval">
+            <summary>
+            The interval of message <see cref="T:StockSharp.Messages.TimeMessage"/> generation. By default, it is equal to 1 sec.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.#ctor(StockSharp.Algo.Storages.BasketMarketDataStorage{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1"/>.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.AddStorage(StockSharp.Algo.Storages.IMarketDataStorage)">
+            <summary>
+            Add inner market data storage.
+            </summary>
+            <param name="storage"></param>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.RemoveStorage``1(StockSharp.BusinessEntities.Security,StockSharp.Messages.MessageTypes,System.Object)">
+            <summary>
+            Remove inner market data storage.
+            </summary>
+            <typeparam name="TStorage"></typeparam>
+            <param name="security"></param>
+            <param name="messageType"></param>
+            <param name="arg"></param>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns><see langword="true" /> if the enumerator was successfully advanced to the next element; <see langword="false" /> if the enumerator has passed the end of the collection.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.Current">
+            <summary>
+            Gets the current element in the collection.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.CachedBasketMarketDataStorage`1.DisposeManaged">
+            <summary>
+            Release resources.
+            </summary>
+        </member>
         <member name="T:StockSharp.Algo.Storages.Csv.CandleCsvSerializer`1">
             <summary>
             The candle serializer in the CSV format.
@@ -5465,7 +5916,7 @@
             Candle arg.
             </summary>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.CandleCsvSerializer`1.Write(System.IO.TextWriter,`0)">
+        <member name="M:StockSharp.Algo.Storages.Csv.CandleCsvSerializer`1.Write(Ecng.Common.CsvFileWriter,`0)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5482,7 +5933,7 @@
         </member>
         <member name="F:StockSharp.Algo.Storages.Csv.CsvHelper.TimeFormat">
             <summary>
-            <see cref="T:System.DateTime"/> format.
+            <see cref="T:System.TimeSpan"/> format.
             </summary>
         </member>
         <member name="M:StockSharp.Algo.Storages.Csv.CsvHelper.ReadTime(Ecng.Common.FastCsvReader,System.DateTime)">
@@ -5537,7 +5988,7 @@
             <param name="data">Data.</param>
             <param name="metaInfo">Meta-information on data for one day.</param>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.CsvMarketDataSerializer`1.Write(System.IO.TextWriter,`0)">
+        <member name="M:StockSharp.Algo.Storages.Csv.CsvMarketDataSerializer`1.Write(Ecng.Common.CsvFileWriter,`0)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5560,9 +6011,14 @@
             <param name="date">Date.</param>
             <returns>Data.</returns>
         </member>
-        <member name="F:StockSharp.Algo.Storages.Csv.CsvMarketDataSerializer`1.TimeFormat">
+        <member name="F:StockSharp.Algo.Storages.Csv.CsvMarketDataSerializer`1.DateFormat">
             <summary>
             <see cref="T:System.DateTime"/> format.
+            </summary>
+        </member>
+        <member name="F:StockSharp.Algo.Storages.Csv.CsvMarketDataSerializer`1.TimeFormat">
+            <summary>
+            <see cref="T:System.TimeSpan"/> format.
             </summary>
         </member>
         <member name="T:StockSharp.Algo.Storages.Csv.Level1CsvSerializer">
@@ -5577,7 +6033,7 @@
             <param name="securityId">Security ID.</param>
             <param name="encoding">Encoding.</param>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.Level1CsvSerializer.Write(System.IO.TextWriter,StockSharp.Messages.Level1ChangeMessage)">
+        <member name="M:StockSharp.Algo.Storages.Csv.Level1CsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Messages.Level1ChangeMessage)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5597,7 +6053,7 @@
             The news serializer in the CSV format.
             </summary>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.NewsCsvSerializer.Write(System.IO.TextWriter,StockSharp.Messages.NewsMessage)">
+        <member name="M:StockSharp.Algo.Storages.Csv.NewsCsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Messages.NewsMessage)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5631,7 +6087,7 @@
             <param name="date">Date.</param>
             <returns>Meta-information on data for one day.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.OrderLogCsvSerializer.Write(System.IO.TextWriter,StockSharp.Messages.ExecutionMessage)">
+        <member name="M:StockSharp.Algo.Storages.Csv.OrderLogCsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Messages.ExecutionMessage)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5658,7 +6114,7 @@
             <param name="securityId">Security ID.</param>
             <param name="encoding">Encoding.</param>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.QuoteCsvSerializer.Write(System.IO.TextWriter,StockSharp.Algo.TimeQuoteChange)">
+        <member name="M:StockSharp.Algo.Storages.Csv.QuoteCsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Algo.TimeQuoteChange)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5692,7 +6148,7 @@
             <param name="date">Date.</param>
             <returns>Meta-information on data for one day.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.TickCsvSerializer.Write(System.IO.TextWriter,StockSharp.Messages.ExecutionMessage)">
+        <member name="M:StockSharp.Algo.Storages.Csv.TickCsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Messages.ExecutionMessage)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -5719,7 +6175,7 @@
             <param name="securityId">Security ID.</param>
             <param name="encoding">Encoding.</param>
         </member>
-        <member name="M:StockSharp.Algo.Storages.Csv.TransactionCsvSerializer.Write(System.IO.TextWriter,StockSharp.Messages.ExecutionMessage)">
+        <member name="M:StockSharp.Algo.Storages.Csv.TransactionCsvSerializer.Write(Ecng.Common.CsvFileWriter,StockSharp.Messages.ExecutionMessage)">
             <summary>
             Write data to the specified writer.
             </summary>
@@ -6147,6 +6603,7 @@
             To save market data in storage.
             </summary>
             <param name="data">Market data.</param>
+            <returns>Count of saved data.</returns>
         </member>
         <member name="M:StockSharp.Algo.Storages.ContinuousSecurityMarketDataStorage`1.Delete(System.Collections.Generic.IEnumerable{`0})">
             <summary>
@@ -6257,6 +6714,16 @@
         <member name="T:StockSharp.Algo.Storages.IEntityRegistry">
             <summary>
             The interface describing the trade objects storage.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.IEntityRegistry.Storage">
+            <summary>
+            The special interface for direct access to the storage.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Algo.Storages.IEntityRegistry.DelayAction">
+            <summary>
+            The time delayed action.
             </summary>
         </member>
         <member name="P:StockSharp.Algo.Storages.IEntityRegistry.Exchanges">
@@ -6399,6 +6866,7 @@
             To save market data in storage.
             </summary>
             <param name="data">Market data.</param>
+            <returns>Count of saved data.</returns>
         </member>
         <member name="M:StockSharp.Algo.Storages.IMarketDataStorage.Delete(System.Collections.IEnumerable)">
             <summary>
@@ -6442,6 +6910,7 @@
             To save market data in storage.
             </summary>
             <param name="data">Market data.</param>
+            <returns>Count of saved data.</returns>
         </member>
         <member name="M:StockSharp.Algo.Storages.IMarketDataStorage`1.Delete(System.Collections.Generic.IEnumerable{`0})">
             <summary>
@@ -6639,11 +7108,6 @@
             The path to the directory with data.
             </summary>
         </member>
-        <member name="P:StockSharp.Algo.Storages.LocalMarketDataDrive.UseAlphabeticPath">
-            <summary>
-            Whether to use the alphabetical path to data. The default is enabled.
-            </summary>
-        </member>
         <member name="P:StockSharp.Algo.Storages.LocalMarketDataDrive.AvailableSecurities">
             <summary>
             Get all available instruments.
@@ -6681,25 +7145,28 @@
             <param name="fileName">The file name.</param>
             <returns>Data type and parameter associated with the type. For example, <see cref="P:StockSharp.Messages.CandleMessage.Arg"/>.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.GetFileName(System.Type,System.Object)">
+        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.GetFileName(System.Type,System.Object,System.Nullable{StockSharp.Algo.Storages.StorageFormats})">
             <summary>
             To get the file name by the type of data.
             </summary>
             <param name="dataType">Data type.</param>
             <param name="arg">The parameter associated with the <paramref name="dataType" /> type. For example, <see cref="P:StockSharp.Messages.CandleMessage.Arg"/>.</param>
+            <param name="format">Storage format. If set an extension will be added to the file name.</param>
             <returns>The file name.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.Load(Ecng.Serialization.SettingsStorage)">
+        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.GetDate(System.String)">
             <summary>
-            Load settings.
+            Convert directory name to the date.
             </summary>
-            <param name="storage">Settings storage.</param>
+            <param name="dirName">Directory name.</param>
+            <returns>The date.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.Save(Ecng.Serialization.SettingsStorage)">
+        <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.GetDirName(System.DateTime)">
             <summary>
-            Save settings.
+            Convert the date to directory name.
             </summary>
-            <param name="storage">Settings storage.</param>
+            <param name="date">The date.</param>
+            <returns>Directory name.</returns>
         </member>
         <member name="M:StockSharp.Algo.Storages.LocalMarketDataDrive.GetSecurityPath(StockSharp.Messages.SecurityId)">
             <summary>
@@ -6992,6 +7459,15 @@
             <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
             <returns>The storage of orders log.</returns>
         </member>
+        <member name="M:StockSharp.Algo.Storages.StorageRegistry.GetTransactionStorage(StockSharp.BusinessEntities.Security,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
+            <summary>
+            To get the transactions storage the specified instrument.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="drive">The storage. If a value is <see langword="null" />, <see cref="P:StockSharp.Algo.Storages.IStorageRegistry.DefaultDrive"/> will be used.</param>
+            <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
+            <returns>The transactions storage.</returns>
+        </member>
         <member name="M:StockSharp.Algo.Storages.StorageRegistry.GetLevel1MessageStorage(StockSharp.BusinessEntities.Security,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
             <summary>
             To get the storage of instrument changes.
@@ -7012,15 +7488,15 @@
             <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
             <returns>The candles storage.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.StorageRegistry.GetExecutionStorage(StockSharp.BusinessEntities.Security,StockSharp.Messages.ExecutionTypes,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
+        <member name="M:StockSharp.Algo.Storages.StorageRegistry.GetExecutionMessageStorage(StockSharp.BusinessEntities.Security,StockSharp.Messages.ExecutionTypes,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
             <summary>
-            To get the execution storage the specified instrument.
+            To get the <see cref="T:StockSharp.Messages.ExecutionMessage"/> storage the specified instrument.
             </summary>
             <param name="security">Security.</param>
             <param name="type">Data type, information about which is contained in the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.</param>
             <param name="drive">The storage. If a value is <see langword="null" />, <see cref="P:StockSharp.Algo.Storages.IStorageRegistry.DefaultDrive"/> will be used.</param>
             <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
-            <returns>The transactions storage.</returns>
+            <returns>The <see cref="T:StockSharp.Messages.ExecutionMessage"/> storage.</returns>
         </member>
         <member name="M:StockSharp.Algo.Storages.StorageRegistry.GetStorage(StockSharp.BusinessEntities.Security,System.Type,System.Object,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
             <summary>
@@ -7179,12 +7655,21 @@
             <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
             <returns>The candles storage.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Storages.IStorageRegistry.GetExecutionStorage(StockSharp.BusinessEntities.Security,StockSharp.Messages.ExecutionTypes,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
+        <member name="M:StockSharp.Algo.Storages.IStorageRegistry.GetExecutionMessageStorage(StockSharp.BusinessEntities.Security,StockSharp.Messages.ExecutionTypes,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
+            <summary>
+            To get the <see cref="T:StockSharp.Messages.ExecutionMessage"/> storage the specified instrument.
+            </summary>
+            <param name="security">Security.</param>
+            <param name="type">Data type, information about which is contained in the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.</param>
+            <param name="drive">The storage. If a value is <see langword="null" />, <see cref="P:StockSharp.Algo.Storages.IStorageRegistry.DefaultDrive"/> will be used.</param>
+            <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
+            <returns>The <see cref="T:StockSharp.Messages.ExecutionMessage"/> storage.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.Storages.IStorageRegistry.GetTransactionStorage(StockSharp.BusinessEntities.Security,StockSharp.Algo.Storages.IMarketDataDrive,StockSharp.Algo.Storages.StorageFormats)">
             <summary>
             To get the transactions storage the specified instrument.
             </summary>
             <param name="security">Security.</param>
-            <param name="type">Data type, information about which is contained in the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.</param>
             <param name="drive">The storage. If a value is <see langword="null" />, <see cref="P:StockSharp.Algo.Storages.IStorageRegistry.DefaultDrive"/> will be used.</param>
             <param name="format">The format type. By default <see cref="F:StockSharp.Algo.Storages.StorageFormats.Binary"/> is passed.</param>
             <returns>The transactions storage.</returns>
@@ -7566,7 +8051,7 @@
             The class for representation in the form of list of instruments, stored in external storage.
             </summary>
         </member>
-        <member name="M:StockSharp.Algo.Storages.SecurityList.#ctor(StockSharp.Algo.Storages.EntityRegistry)">
+        <member name="M:StockSharp.Algo.Storages.SecurityList.#ctor(StockSharp.Algo.Storages.IEntityRegistry)">
             <summary>
             Initializes a new instance of the <see cref="T:StockSharp.Algo.Storages.SecurityList"/>.
             </summary>
@@ -7695,7 +8180,7 @@
             </summary>
             <param name="message">Message.</param>
         </member>
-        <member name="M:StockSharp.Algo.BasketMessageAdapter.OnInnerAdapterNewMessage(StockSharp.Messages.IMessageAdapter,StockSharp.Messages.Message)">
+        <member name="M:StockSharp.Algo.BasketMessageAdapter.OnInnerAdapterNewOutMessage(StockSharp.Messages.IMessageAdapter,StockSharp.Messages.Message)">
             <summary>
             The embedded adapter event <see cref="E:StockSharp.Messages.IMessageChannel.NewOutMessage"/> handler.
             </summary>
@@ -7722,7 +8207,7 @@
         </member>
         <member name="M:StockSharp.Algo.BasketMessageAdapter.DisposeManaged">
             <summary>
-            Освободить занятые ресурсы.
+            To release allocated resources.
             </summary>
         </member>
         <member name="T:StockSharp.Algo.BasketPortfolio">
@@ -9277,7 +9762,7 @@
             <param name="arg">Candle arg.</param>
             <returns>The candles series. <see langword="null" /> if this series is not registered.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles``1(Ecng.Collections.IEnumerableEx{StockSharp.BusinessEntities.Trade},System.Object)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles``1(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Trade},System.Object)">
             <summary>
             To create candles from the tick trades collection.
             </summary>
@@ -9286,7 +9771,7 @@
             <param name="arg">Candle arg.</param>
             <returns>Candles.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(Ecng.Collections.IEnumerableEx{StockSharp.BusinessEntities.Trade},StockSharp.Algo.Candles.CandleSeries)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Trade},StockSharp.Algo.Candles.CandleSeries)">
             <summary>
             To create candles from the tick trades collection.
             </summary>
@@ -9294,7 +9779,7 @@
             <param name="series">Candles series.</param>
             <returns>Candles.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(Ecng.Collections.IEnumerableEx{StockSharp.Messages.ExecutionMessage},StockSharp.Algo.Candles.CandleSeries)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage},StockSharp.Algo.Candles.CandleSeries)">
             <summary>
             To create candles from the tick trades collection.
             </summary>
@@ -9302,7 +9787,7 @@
             <param name="series">Candles series.</param>
             <returns>Candles.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(Ecng.Collections.IEnumerableEx{StockSharp.BusinessEntities.MarketDepth},StockSharp.Algo.Candles.CandleSeries)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.MarketDepth},StockSharp.Algo.Candles.CandleSeries)">
             <summary>
             To create candles from the order books collection.
             </summary>
@@ -9310,7 +9795,7 @@
             <param name="series">Candles series.</param>
             <returns>Candles.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(Ecng.Collections.IEnumerableEx{StockSharp.Messages.QuoteChangeMessage},StockSharp.Algo.Candles.CandleSeries)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToCandles(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage},StockSharp.Algo.Candles.CandleSeries)">
             <summary>
             To create candles from the order books collection.
             </summary>
@@ -9318,14 +9803,14 @@
             <param name="series">Candles series.</param>
             <returns>Candles.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToTrades(Ecng.Collections.IEnumerableEx{StockSharp.Algo.Candles.Candle})">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToTrades(System.Collections.Generic.IEnumerable{StockSharp.Algo.Candles.Candle})">
             <summary>
             To create ticks from candles.
             </summary>
             <param name="candles">Candles.</param>
             <returns>Trades.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToTrades(Ecng.Collections.IEnumerableEx{StockSharp.Messages.CandleMessage},System.Decimal)">
+        <member name="M:StockSharp.Algo.Candles.CandleHelper.ToTrades(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage},System.Decimal)">
             <summary>
             To create tick trades from candles.
             </summary>
@@ -10192,24 +10677,10 @@
             <summary>
             The class to create connections to trading systems.
             </summary>
-            <summary>
-            The class to create connections to trading systems.
-            </summary>
-            <summary>
-            The class to create connections to trading systems.
-            </summary>
-            <summary>
-            The class to create connections to trading systems.
-            </summary>
         </member>
         <member name="P:StockSharp.Algo.Connector.RaiseConnectedOnFirstAdapter">
             <summary>
             To call the <see cref="E:StockSharp.Algo.Connector.Connected"/> event when the first adapter connects to <see cref="P:StockSharp.Algo.Connector.Adapter"/>.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Algo.Connector.OutMessageChannel">
-            <summary>
-            Outgoing message channel.
             </summary>
         </member>
         <member name="P:StockSharp.Algo.Connector.InMessageChannel">
@@ -10217,28 +10688,15 @@
             Input message channel.
             </summary>
         </member>
+        <member name="P:StockSharp.Algo.Connector.OutMessageChannel">
+            <summary>
+            Outgoing message channel.
+            </summary>
+        </member>
         <member name="P:StockSharp.Algo.Connector.Adapter">
             <summary>
             Message adapter.
             </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.SendOutMessage(StockSharp.Messages.Message)">
-            <summary>
-            Send outgoing message.
-            </summary>
-            <param name="message">Message.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.SendOutError(System.Exception)">
-            <summary>
-            Send error message.
-            </summary>
-            <param name="error">Error detais.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.SendInMessage(StockSharp.Messages.Message)">
-            <summary>
-            Send message.
-            </summary>
-            <param name="message">Message.</param>
         </member>
         <member name="P:StockSharp.Algo.Connector.TransactionAdapter">
             <summary>
@@ -10255,11 +10713,37 @@
             Storage adapter.
             </summary>
         </member>
+        <member name="M:StockSharp.Algo.Connector.SendInMessage(StockSharp.Messages.Message)">
+            <summary>
+            Send message.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Connector.SendOutMessage(StockSharp.Messages.Message)">
+            <summary>
+            Send outgoing message.
+            </summary>
+            <param name="message">Message.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Connector.SendOutError(System.Exception)">
+            <summary>
+            Send error message.
+            </summary>
+            <param name="error">Error detais.</param>
+        </member>
         <member name="M:StockSharp.Algo.Connector.OnProcessMessage(StockSharp.Messages.Message)">
             <summary>
             Process message.
             </summary>
             <param name="message">Message.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Connector.GetPortfolio(System.String,System.Func{StockSharp.BusinessEntities.Portfolio,System.Boolean})">
+            <summary>
+            To get the portfolio by the name. If the portfolio is not registered, it is created via <see cref="M:StockSharp.Algo.IEntityFactory.CreatePortfolio(System.String)"/>.
+            </summary>
+            <param name="name">Portfolio name.</param>
+            <param name="changePortfolio">Portfolio handler.</param>
+            <returns>Portfolio.</returns>
         </member>
         <member name="E:StockSharp.Algo.Connector.NewMyTrade">
             <summary>
@@ -10466,6 +10950,21 @@
             Connection error (for example, the connection was aborted by server).
             </summary>
         </member>
+        <member name="E:StockSharp.Algo.Connector.ConnectedEx">
+            <summary>
+            Connected.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Algo.Connector.DisconnectedEx">
+            <summary>
+            Disconnected.
+            </summary>
+        </member>
+        <member name="E:StockSharp.Algo.Connector.ConnectionErrorEx">
+            <summary>
+            Connection error (for example, the connection was aborted by server).
+            </summary>
+        </member>
         <member name="E:StockSharp.Algo.Connector.Error">
             <summary>
             Dats process error.
@@ -10552,15 +11051,34 @@
             To call the event <see cref="E:StockSharp.Algo.Connector.Connected"/>.
             </summary>
         </member>
+        <member name="M:StockSharp.Algo.Connector.RaiseConnectedEx(StockSharp.Messages.IMessageAdapter)">
+            <summary>
+            To call the event <see cref="E:StockSharp.Algo.Connector.ConnectedEx"/>.
+            </summary>
+            <param name="adapter">Adapter, initiated event.</param>
+        </member>
         <member name="M:StockSharp.Algo.Connector.RaiseDisconnected">
             <summary>
             To call the event <see cref="E:StockSharp.Algo.Connector.Disconnected"/>.
             </summary>
         </member>
+        <member name="M:StockSharp.Algo.Connector.RaiseDisconnectedEx(StockSharp.Messages.IMessageAdapter)">
+            <summary>
+            To call the event <see cref="E:StockSharp.Algo.Connector.DisconnectedEx"/>.
+            </summary>
+            <param name="adapter">Adapter, initiated event.</param>
+        </member>
         <member name="M:StockSharp.Algo.Connector.RaiseConnectionError(System.Exception)">
             <summary>
             To call the event <see cref="E:StockSharp.Algo.Connector.ConnectionError"/>.
             </summary>
+            <param name="exception">Error connection.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Connector.RaiseConnectionErrorEx(StockSharp.Messages.IMessageAdapter,System.Exception)">
+            <summary>
+            To call the event <see cref="E:StockSharp.Algo.Connector.ConnectionErrorEx"/>.
+            </summary>
+            <param name="adapter">Adapter, initiated event.</param>
             <param name="exception">Error connection.</param>
         </member>
         <member name="M:StockSharp.Algo.Connector.RaiseError(System.Exception)">
@@ -10940,6 +11458,11 @@
             The <see cref="T:StockSharp.Messages.TimeMessage"/> message generating Interval. The default is 10 milliseconds.
             </summary>
         </member>
+        <member name="P:StockSharp.Algo.Connector.TimeChange">
+            <summary>
+            Increment periodically <see cref="P:StockSharp.Algo.Connector.MarketTimeChangedInterval"/> value of <see cref="P:StockSharp.Algo.Connector.CurrentTime"/>.
+            </summary>
+        </member>
         <member name="M:StockSharp.Algo.Connector.Connect">
             <summary>
             Connect to trading system.
@@ -11097,6 +11620,12 @@
             <param name="board">Trading board. If the value is equal to <see langword="null" />, then the board does not match the orders cancel filter.</param>
             <param name="security">Instrument. If the value is equal to <see langword="null" />, then the instrument does not match the orders cancel filter.</param>
         </member>
+        <member name="M:StockSharp.Algo.Connector.ChangePassword(System.String)">
+            <summary>
+            Change password.
+            </summary>
+            <param name="newPassword">New password.</param>
+        </member>
         <member name="M:StockSharp.Algo.Connector.GetSecurity(StockSharp.Messages.SecurityId)">
             <summary>
             Get security by code.
@@ -11118,14 +11647,6 @@
             </summary>
             <param name="security">Security.</param>
             <returns>Security ID.</returns>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.GetPortfolio(System.String,System.Func{StockSharp.BusinessEntities.Portfolio,System.Boolean})">
-            <summary>
-            To get the portfolio by the name. If the portfolio is not registered, it is created via <see cref="M:StockSharp.Algo.IEntityFactory.CreatePortfolio(System.String)"/>.
-            </summary>
-            <param name="name">Portfolio name.</param>
-            <param name="changePortfolio">Portfolio handler.</param>
-            <returns>Portfolio.</returns>
         </member>
         <member name="M:StockSharp.Algo.Connector.CreateSecurityId(System.String,System.String)">
             <summary>
@@ -11153,16 +11674,6 @@
         <member name="M:StockSharp.Algo.Connector.ClearCache">
             <summary>
             Clear cache.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.StartMarketTimer">
-            <summary>
-            To start the messages generating timer <see cref="T:StockSharp.Messages.TimeMessage"/> with the <see cref="P:StockSharp.Algo.Connector.MarketTimeChangedInterval"/> interval.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Connector.StopMarketTimer">
-            <summary>
-            To stop the timer started earlier via <see cref="M:StockSharp.Algo.Connector.StartMarketTimer"/>.
             </summary>
         </member>
         <member name="M:StockSharp.Algo.Connector.DisposeManaged">
@@ -12289,358 +12800,6 @@
             <param name="side">The main position direction.</param>
             <returns>The option position.</returns>
         </member>
-        <member name="T:StockSharp.Algo.Export.BaseExporter">
-            <summary>
-            The base class of export.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String)">
-            <summary>
-            Initialize <see cref="T:StockSharp.Algo.Export.BaseExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="path">The path to file.</param>
-        </member>
-        <member name="P:StockSharp.Algo.Export.BaseExporter.Security">
-            <summary>
-            Security.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Algo.Export.BaseExporter.Arg">
-            <summary>
-            The data parameter.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Algo.Export.BaseExporter.Path">
-            <summary>
-            The path to file.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Type,System.Collections.IEnumerable)">
-            <summary>
-            To export values.
-            </summary>
-            <param name="dataType">Market data type.</param>
-            <param name="values">Value.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.CanProcess(System.Int32)">
-            <summary>
-            Is it possible to continue export.
-            </summary>
-            <param name="exported">The number of exported elements from previous call of the method.</param>
-            <returns><see langword="true" />, if export can be continued, otherwise, <see langword="false" />.</returns>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="T:StockSharp.Algo.Export.BinExporter">
-            <summary>
-            The export into the StockSharp binary format.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},StockSharp.Algo.Storages.IMarketDataDrive)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.BinExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="drive">Storage.</param>
-        </member>
-        <member name="P:StockSharp.Algo.Export.BinExporter.BatchSize">
-            <summary>
-            The size of transmitted data package. The default is 50 elements.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.BinExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="T:StockSharp.Algo.Export.DatabaseExporter">
-            <summary>
-            The export into database.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},Ecng.Xaml.Database.DatabaseConnectionPair)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.DatabaseExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="connection">The connection to DB.</param>
-        </member>
-        <member name="P:StockSharp.Algo.Export.DatabaseExporter.BatchSize">
-            <summary>
-            The size of transmitted data package. The default is 50 elements.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Algo.Export.DatabaseExporter.CheckUnique">
-            <summary>
-            To check uniqueness of data in the database. It effects performance. The default is enabled.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.DatabaseExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="P:StockSharp.Algo.Export.Database.DbProviders.BaseDbProvider.CheckUnique">
-            <summary>
-            To check uniqueness of data in the database. It effects performance.
-            </summary>
-        </member>
-        <member name="T:StockSharp.Algo.Export.ExcelExporter">
-            <summary>
-            The export into Excel.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String,System.Action)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.ExcelExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="fileName">The path to file.</param>
-            <param name="breaked">The processor, which will be called if maximal value of strings is exceeded.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.ExcelExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="T:StockSharp.Algo.Export.TextExporter">
-            <summary>
-            The export into text file.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.TextExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="fileName">The path to file.</param>
-            <param name="template">The string formatting template.</param>
-            <param name="header">Header at the first line. Do not add header while empty string.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.TextExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="T:StockSharp.Algo.Export.XmlExporter">
-            <summary>
-            The export into xml.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.#ctor(StockSharp.BusinessEntities.Security,System.Object,System.Func{System.Int32,System.Boolean},System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StockSharp.Algo.Export.XmlExporter"/>.
-            </summary>
-            <param name="security">Security.</param>
-            <param name="arg">The data parameter.</param>
-            <param name="isCancelled">The processor, returning export interruption sign.</param>
-            <param name="fileName">The path to file.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.QuoteChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.QuoteChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.Level1ChangeMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.CandleMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.NewsMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.NewsMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
-        <member name="M:StockSharp.Algo.Export.XmlExporter.Export(System.Collections.Generic.IEnumerable{StockSharp.Messages.SecurityMessage})">
-            <summary>
-            To export <see cref="T:StockSharp.Messages.SecurityMessage"/>.
-            </summary>
-            <param name="messages">Messages.</param>
-        </member>
         <member name="T:StockSharp.Algo.ExpressionHelper">
             <summary>
             Extension class for <see cref="T:StockSharp.Algo.ExpressionIndexSecurity"/>.
@@ -13066,7 +13225,7 @@
             <param name="item">Order log item.</param>
             <returns>The reason for order cancelling in order log.</returns>
         </member>
-        <member name="M:StockSharp.Algo.OrderLogHelper.ToMarketDepths(Ecng.Collections.IEnumerableEx{StockSharp.BusinessEntities.OrderLogItem},StockSharp.Messages.IOrderLogMarketDepthBuilder,System.TimeSpan,System.Int32)">
+        <member name="M:StockSharp.Algo.OrderLogHelper.ToMarketDepths(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.OrderLogItem},StockSharp.Messages.IOrderLogMarketDepthBuilder,System.TimeSpan,System.Int32)">
             <summary>
             Build market depths from order log.
             </summary>
@@ -13076,7 +13235,7 @@
             <param name="maxDepth">The maximal depth of order book. The default is <see cref="F:System.Int32.MaxValue"/>, which means endless depth.</param>
             <returns>Market depths.</returns>
         </member>
-        <member name="M:StockSharp.Algo.OrderLogHelper.ToMarketDepths(Ecng.Collections.IEnumerableEx{StockSharp.Messages.ExecutionMessage},StockSharp.Messages.IOrderLogMarketDepthBuilder,System.TimeSpan,System.Int32)">
+        <member name="M:StockSharp.Algo.OrderLogHelper.ToMarketDepths(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage},StockSharp.Messages.IOrderLogMarketDepthBuilder,System.TimeSpan,System.Int32)">
             <summary>
             Build market depths from order log.
             </summary>
@@ -13086,14 +13245,14 @@
             <param name="maxDepth">The maximal depth of order book. The default is <see cref="F:System.Int32.MaxValue"/>, which means endless depth.</param>
             <returns>Market depths.</returns>
         </member>
-        <member name="M:StockSharp.Algo.OrderLogHelper.ToTrades(Ecng.Collections.IEnumerableEx{StockSharp.BusinessEntities.OrderLogItem})">
+        <member name="M:StockSharp.Algo.OrderLogHelper.ToTrades(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.OrderLogItem})">
             <summary>
             To build tick trades from the orders log.
             </summary>
             <param name="items">Orders log lines.</param>
             <returns>Tick trades.</returns>
         </member>
-        <member name="M:StockSharp.Algo.OrderLogHelper.ToTicks(Ecng.Collections.IEnumerableEx{StockSharp.Messages.ExecutionMessage})">
+        <member name="M:StockSharp.Algo.OrderLogHelper.ToTicks(System.Collections.Generic.IEnumerable{StockSharp.Messages.ExecutionMessage})">
             <summary>
             To build tick trades from the orders log.
             </summary>
@@ -13802,7 +13961,7 @@
             <param name="stringId">Trade ID (as string, if electronic board does not use numeric order ID representation).</param>
             <returns>Created trade.</returns>
         </member>
-        <member name="M:StockSharp.Algo.IEntityFactory.CreateOrder(StockSharp.BusinessEntities.Security,StockSharp.Messages.OrderTypes,System.Int64)">
+        <member name="M:StockSharp.Algo.IEntityFactory.CreateOrder(StockSharp.BusinessEntities.Security,System.Nullable{StockSharp.Messages.OrderTypes},System.Int64)">
             <summary>
             To create the order by the transaction identifier.
             </summary>
@@ -13904,7 +14063,7 @@
             <param name="stringId">Trade ID (as string, if electronic board does not use numeric order ID representation).</param>
             <returns>Created trade.</returns>
         </member>
-        <member name="M:StockSharp.Algo.EntityFactory.CreateOrder(StockSharp.BusinessEntities.Security,StockSharp.Messages.OrderTypes,System.Int64)">
+        <member name="M:StockSharp.Algo.EntityFactory.CreateOrder(StockSharp.BusinessEntities.Security,System.Nullable{StockSharp.Messages.OrderTypes},System.Int64)">
             <summary>
             To create the order by the transaction identifier.
             </summary>
@@ -14311,7 +14470,7 @@
             <param name="state">Order state.</param>
             <returns>The formatted string.</returns>
         </member>
-        <member name="M:StockSharp.Algo.Strategies.Reporting.StrategyReport.Format(StockSharp.Messages.OrderTypes)">
+        <member name="M:StockSharp.Algo.Strategies.Reporting.StrategyReport.Format(System.Nullable{StockSharp.Messages.OrderTypes})">
             <summary>
             To format the order type in string.
             </summary>
@@ -15516,10 +15675,11 @@
             <param name="portfolios">Portfolios, the operation will be performed with.</param>
             <param name="storageRegistry">Market data storage.</param>
         </member>
-        <member name="M:StockSharp.Algo.Strategies.Testing.BatchEmulation.Start(Ecng.Collections.IEnumerableEx{StockSharp.Algo.Strategies.Strategy})">
+        <member name="M:StockSharp.Algo.Strategies.Testing.BatchEmulation.Start(System.Collections.Generic.IEnumerable{StockSharp.Algo.Strategies.Strategy})">
             <summary>
-            To start paper trading.
+            Start emulation.
             </summary>
+            <param name="strategies">The strategies.</param>
         </member>
         <member name="M:StockSharp.Algo.Strategies.Testing.BatchEmulation.Stop">
             <summary>
@@ -15715,11 +15875,6 @@
             Gets a value indicating whether the re-registration orders via the method <see cref="M:StockSharp.BusinessEntities.IConnector.ReRegisterOrder(StockSharp.BusinessEntities.Order,StockSharp.BusinessEntities.Order)"/> as a single transaction.
             </summary>
         </member>
-        <member name="M:StockSharp.Algo.Testing.BaseEmulationConnector.StartMarketTimer">
-            <summary>
-            To start the messages generating timer <see cref="T:StockSharp.Messages.TimeMessage"/> with the <see cref="P:StockSharp.Algo.Connector.MarketTimeChangedInterval"/> interval.
-            </summary>
-        </member>
         <member name="M:StockSharp.Algo.Testing.BaseEmulationConnector.RegisterTrades(StockSharp.Algo.Testing.TradeGenerator)">
             <summary>
             To register the trades generator.
@@ -15830,6 +15985,14 @@
             The interval of message <see cref="T:StockSharp.Messages.TimeMessage"/> generation. By default, it is equal to 1 sec.
             </summary>
         </member>
+        <member name="P:StockSharp.Algo.Testing.HistoryMessageAdapter.MaxMessageCount">
+            <summary>
+            Max message queue count.
+            </summary>
+            <remarks>
+            The default value is -1, which corresponds to the size without limitations.
+            </remarks>
+        </member>
         <member name="M:StockSharp.Algo.Testing.HistoryMessageAdapter.#ctor(Ecng.Common.IdGenerator)">
             <summary>
             Initializes a new instance of the <see cref="T:StockSharp.Algo.Testing.HistoryMessageAdapter"/>.
@@ -15853,6 +16016,18 @@
             Date in history to stop the paper trading (date is included).
             </summary>
         </member>
+        <member name="P:StockSharp.Algo.Testing.HistoryMessageAdapter.OrderLogMarketDepthBuilders">
+            <summary>
+            Order book builders.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Testing.HistoryMessageAdapter.CreateOrderLogMarketDepthBuilder(StockSharp.Messages.SecurityId)">
+            <summary>
+            Create market depth builder.
+            </summary>
+            <param name="securityId">Security ID.</param>
+            <returns>Order log to market depth builder.</returns>
+        </member>
         <member name="P:StockSharp.Algo.Testing.HistoryMessageAdapter.CurrentTime">
             <summary>
             The current time.
@@ -15873,6 +16048,12 @@
             Send message.
             </summary>
             <param name="message">Message.</param>
+        </member>
+        <member name="M:StockSharp.Algo.Testing.HistoryMessageAdapter.SendOutMessage">
+            <summary>
+            Send next outgoing message.
+            </summary>
+            <returns><see langword="true" />, if message was sent, otherwise, <see langword="false" />.</returns>
         </member>
         <member name="M:StockSharp.Algo.Testing.HistoryMessageAdapter.SendOutMessage(StockSharp.Messages.Message)">
             <summary>
@@ -16032,6 +16213,11 @@
         <member name="M:StockSharp.Algo.Testing.HistoryEmulationConnector.OnDisconnect">
             <summary>
             Disconnect from trading system.
+            </summary>
+        </member>
+        <member name="M:StockSharp.Algo.Testing.HistoryEmulationConnector.DisposeManaged">
+            <summary>
+            To release allocated resources. In particular, to disconnect from the trading system via <see cref="M:StockSharp.Algo.Connector.Disconnect"/>.
             </summary>
         </member>
         <member name="M:StockSharp.Algo.Testing.HistoryEmulationConnector.Start">
@@ -16366,7 +16552,7 @@
             <summary>
             To convert the tick trade.
             </summary>
-            <param name="message">Tick trade.</param>
+            <param name="tick">Tick trade.</param>
             <returns>Stream <see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
         </member>
         <member name="M:StockSharp.Algo.Testing.ExecutionLogConverter.ToExecutionLog(StockSharp.Messages.Level1ChangeMessage)">
@@ -17837,7 +18023,7 @@
             <param name="board">Board.</param>
             <returns>Board.</returns>
         </member>
-        <member name="M:StockSharp.Algo.MessageConverterHelper.ToMessages``2(Ecng.Collections.IEnumerableEx{``0})">
+        <member name="M:StockSharp.Algo.MessageConverterHelper.ToMessages``2(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             To convert trading objects into messages.
             </summary>
@@ -17846,7 +18032,7 @@
             <param name="entities">Trading objects.</param>
             <returns>Messages.</returns>
         </member>
-        <member name="M:StockSharp.Algo.MessageConverterHelper.ToEntities``2(Ecng.Collections.IEnumerableEx{``0},StockSharp.BusinessEntities.Security)">
+        <member name="M:StockSharp.Algo.MessageConverterHelper.ToEntities``2(System.Collections.Generic.IEnumerable{``0},StockSharp.BusinessEntities.Security)">
             <summary>
             To convert messages into trading objects.
             </summary>
@@ -17856,7 +18042,7 @@
             <param name="security">Security.</param>
             <returns>Trading objects.</returns>
         </member>
-        <member name="M:StockSharp.Algo.MessageConverterHelper.ToCandles``1(Ecng.Collections.IEnumerableEx{StockSharp.Messages.CandleMessage},StockSharp.BusinessEntities.Security,System.Type)">
+        <member name="M:StockSharp.Algo.MessageConverterHelper.ToCandles``1(System.Collections.Generic.IEnumerable{StockSharp.Messages.CandleMessage},StockSharp.BusinessEntities.Security,System.Type)">
             <summary>
             To convert messages into trading objects.
             </summary>
@@ -18109,6 +18295,14 @@
             The auxiliary class for provision of various algorithmic functionalities.
             </summary>
         </member>
+        <member name="M:StockSharp.Algo.TraderHelper.CheckModification(StockSharp.Messages.OrderStates,StockSharp.Messages.OrderStates)">
+            <summary>
+            Chech the possibility order's state change.
+            </summary>
+            <param name="prev">Previous order's state.</param>
+            <param name="curr">Current order's state.</param>
+            <returns>The current order's state.</returns>
+        </member>
         <member name="M:StockSharp.Algo.TraderHelper.GetFilteredQuotes(System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Quote},System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Order},System.Collections.Generic.IEnumerable{StockSharp.BusinessEntities.Order})">
             <summary>
             To filter the order book from own orders.
@@ -18200,7 +18394,7 @@
             <summary>
             To get the position on My trade.
             </summary>
-            <param name="message">My trade, used for position calculation. At buy the trade volume <see cref="P:StockSharp.Messages.ExecutionMessage.Volume"/> is taken with positive sign, at sell - with negative.</param>
+            <param name="message">My trade, used for position calculation. At buy the trade volume <see cref="P:StockSharp.Messages.ExecutionMessage.TradeVolume"/> is taken with positive sign, at sell - with negative.</param>
             <returns>Position.</returns>
         </member>
         <member name="M:StockSharp.Algo.TraderHelper.GetPosition(StockSharp.BusinessEntities.Order,StockSharp.BusinessEntities.IConnector)">
@@ -18765,7 +18959,7 @@
             <param name="n">The N size.</param>
             <returns>The end T+N date.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.GetLatency(StockSharp.BusinessEntities.Security,System.DateTimeOffset,System.DateTime)">
+        <member name="M:StockSharp.Algo.TraderHelper.GetLatency(StockSharp.BusinessEntities.Security,System.DateTimeOffset,System.DateTimeOffset)">
             <summary>
             To calculate delay based on difference between the server and local time.
             </summary>
@@ -18774,7 +18968,7 @@
             <param name="localTime">Local time.</param>
             <returns>Latency.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.GetLatency(StockSharp.Messages.SecurityId,System.DateTimeOffset,System.DateTime)">
+        <member name="M:StockSharp.Algo.TraderHelper.GetLatency(StockSharp.Messages.SecurityId,System.DateTimeOffset,System.DateTimeOffset)">
             <summary>
             To calculate delay based on difference between the server and local time.
             </summary>
@@ -18892,7 +19086,7 @@
             <param name="position">Position.</param>
             <param name="message">Position change message.</param>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.ApplyChanges(StockSharp.BusinessEntities.Security,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{StockSharp.Messages.Level1Fields,System.Object}},System.DateTimeOffset,System.DateTime)">
+        <member name="M:StockSharp.Algo.TraderHelper.ApplyChanges(StockSharp.BusinessEntities.Security,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{StockSharp.Messages.Level1Fields,System.Object}},System.DateTimeOffset,System.DateTimeOffset)">
             <summary>
             Apply change to the security object.
             </summary>
@@ -19168,19 +19362,26 @@
             <param name="value"><see cref="T:System.Single"/> value.</param>
             <returns><see cref="T:System.Decimal"/> value.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.GetIso10962(StockSharp.BusinessEntities.Security)">
+        <member name="M:StockSharp.Algo.TraderHelper.Iso10962(StockSharp.Messages.SecurityMessage)">
             <summary>
             To get the type for the instrument in the ISO 10962 standard.
             </summary>
             <param name="security">Security.</param>
             <returns>Type in ISO 10962 standard.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.FromIso10962(System.String)">
+        <member name="M:StockSharp.Algo.TraderHelper.Iso10962ToSecurityType(System.String)">
             <summary>
             To convert the type in the ISO 10962 standard into <see cref="T:StockSharp.Messages.SecurityTypes"/>.
             </summary>
-            <param name="type">Type in ISO 10962 standard.</param>
+            <param name="cfi">Type in ISO 10962 standard.</param>
             <returns>Security type.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.TraderHelper.Iso10962ToOptionType(System.String)">
+            <summary>
+            To convert the type in the ISO 10962 standard into <see cref="T:StockSharp.Messages.OptionTypes"/>.
+            </summary>
+            <param name="cfi">Type in ISO 10962 standard.</param>
+            <returns>Option type.</returns>
         </member>
         <member name="M:StockSharp.Algo.TraderHelper.SafeGetVolume(StockSharp.Messages.ExecutionMessage)">
             <summary>
@@ -19196,7 +19397,7 @@
             <param name="message">Operations.</param>
             <returns>Order ID.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.ToTicks(Ecng.Collections.IEnumerableEx{StockSharp.Messages.Level1ChangeMessage})">
+        <member name="M:StockSharp.Algo.TraderHelper.ToTicks(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
             <summary>
             To convert level1 data into tick data.
             </summary>
@@ -19217,7 +19418,7 @@
             <param name="level1">Level1 data.</param>
             <returns>Tick data.</returns>
         </member>
-        <member name="M:StockSharp.Algo.TraderHelper.ToOrderBooks(Ecng.Collections.IEnumerableEx{StockSharp.Messages.Level1ChangeMessage})">
+        <member name="M:StockSharp.Algo.TraderHelper.ToOrderBooks(System.Collections.Generic.IEnumerable{StockSharp.Messages.Level1ChangeMessage})">
             <summary>
             To convert level1 data into order books.
             </summary>
@@ -19230,6 +19431,20 @@
             </summary>
             <param name="level1">Level1 data.</param>
             <returns>Quotes.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.TraderHelper.IsToday(System.DateTimeOffset)">
+            <summary>
+            To check the specified date is today.
+            </summary>
+            <param name="date">The specified date.</param>
+            <returns><see langword="true"/> if the specified date is today, otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Algo.TraderHelper.IsGtc(System.DateTimeOffset)">
+            <summary>
+            To check the specified date is GTC.
+            </summary>
+            <param name="date">The specified date.</param>
+            <returns><see langword="true"/> if the specified date is GTC, otherwise, <see langword="false"/>.</returns>
         </member>
     </members>
 </doc>

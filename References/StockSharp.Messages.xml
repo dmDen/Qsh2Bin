@@ -601,31 +601,6 @@
             </summary>
             <returns>Copy.</returns>
         </member>
-        <member name="T:StockSharp.Messages.ClearQueueMessage">
-            <summary>
-            Clear message queue message.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.ClearQueueMessage.ClearMessageType">
-            <summary>
-            Type of messages that should be deleted. If the value is <see langword="null" />, all messages will be deleted.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.ClearQueueMessage.SecurityId">
-            <summary>
-            Security id. If the value is <see langword="null" />, all messages for the security will be deleted.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.ClearQueueMessage.Arg">
-            <summary>
-            An additional argument for the market data filter.
-            </summary>
-        </member>
-        <member name="M:StockSharp.Messages.ClearQueueMessage.#ctor">
-            <summary>
-            Initialize <see cref="T:StockSharp.Messages.ClearQueueMessage"/>.
-            </summary>
-        </member>
         <member name="T:StockSharp.Messages.ConnectionStates">
             <summary>
             Connection states.
@@ -1638,14 +1613,14 @@
             Tick trade.
             </summary>
         </member>
-        <member name="F:StockSharp.Messages.ExecutionTypes.Order">
+        <member name="F:StockSharp.Messages.ExecutionTypes.Transaction">
             <summary>
-            Order log.
+            Transaction.
             </summary>
         </member>
-        <member name="F:StockSharp.Messages.ExecutionTypes.Trade">
+        <member name="F:StockSharp.Messages.ExecutionTypes.Obsolete">
             <summary>
-            Own trade.
+            Obsolete.
             </summary>
         </member>
         <member name="F:StockSharp.Messages.ExecutionTypes.OrderLog">
@@ -1671,6 +1646,11 @@
         <member name="P:StockSharp.Messages.ExecutionMessage.ClientCode">
             <summary>
             Client code assigned by the broker.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.ExecutionMessage.BrokerCode">
+            <summary>
+            Broker firm code.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.DepoName">
@@ -1728,14 +1708,29 @@
             Derived order ID (e.g., conditional order generated a real exchange order).
             </summary>
         </member>
+        <member name="P:StockSharp.Messages.ExecutionMessage.HasOrderInfo">
+            <summary>
+            Is the message contains order info.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.ExecutionMessage.HasTradeInfo">
+            <summary>
+            Is the message contains trade info.
+            </summary>
+        </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.OrderPrice">
             <summary>
             Order price.
             </summary>
         </member>
-        <member name="P:StockSharp.Messages.ExecutionMessage.Volume">
+        <member name="P:StockSharp.Messages.ExecutionMessage.OrderVolume">
             <summary>
             Number of contracts in an order.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.ExecutionMessage.TradeVolume">
+            <summary>
+            Number of contracts in an trade.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.VisibleVolume">
@@ -1843,22 +1838,22 @@
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.Commission">
             <summary>
-            Commission (broker, exchange etc.).  Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Order"/> or <see cref="F:StockSharp.Messages.ExecutionTypes.Trade"/>.
+            Commission (broker, exchange etc.).  Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Transaction"/>.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.Latency">
             <summary>
-            Network latency. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Order"/>.
+            Network latency. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Transaction"/>.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.Slippage">
             <summary>
-            Slippage in trade price. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Trade"/>.
+            Slippage in trade price. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Transaction"/>.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.UserOrderId">
             <summary>
-            User order id. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Order"/>.
+            User order id. Uses when <see cref="P:StockSharp.Messages.ExecutionMessage.ExecutionType"/> set to <see cref="F:StockSharp.Messages.ExecutionTypes.Transaction"/>.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.ExecutionMessage.Currency">
@@ -1929,46 +1924,11 @@
             <param name="message">Market depth.</param>
             <returns>Best ask, or <see langword="null" />, if no asks are empty.</returns>
         </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderMessage)">
+        <member name="M:StockSharp.Messages.Extensions.CreateReply(StockSharp.Messages.OrderMessage)">
             <summary>
             Cast <see cref="T:StockSharp.Messages.OrderMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
             </summary>
             <param name="message"><see cref="T:StockSharp.Messages.OrderMessage"/>.</param>
-            <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
-        </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderGroupCancelMessage)">
-            <summary>
-            Cast <see cref="T:StockSharp.Messages.OrderGroupCancelMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="message"><see cref="T:StockSharp.Messages.OrderGroupCancelMessage"/>.</param>
-            <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
-        </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderPairReplaceMessage)">
-            <summary>
-            Cast <see cref="T:StockSharp.Messages.OrderPairReplaceMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="message"><see cref="T:StockSharp.Messages.OrderPairReplaceMessage"/>.</param>
-            <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
-        </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderCancelMessage)">
-            <summary>
-            Cast <see cref="T:StockSharp.Messages.OrderCancelMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="message"><see cref="T:StockSharp.Messages.OrderCancelMessage"/>.</param>
-            <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
-        </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderReplaceMessage)">
-            <summary>
-            Cast <see cref="T:StockSharp.Messages.OrderReplaceMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="message"><see cref="T:StockSharp.Messages.OrderReplaceMessage"/>.</param>
-            <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
-        </member>
-        <member name="M:StockSharp.Messages.Extensions.ToExecutionMessage(StockSharp.Messages.OrderRegisterMessage)">
-            <summary>
-            Cast <see cref="T:StockSharp.Messages.OrderRegisterMessage"/> to the <see cref="T:StockSharp.Messages.ExecutionMessage"/>.
-            </summary>
-            <param name="message"><see cref="T:StockSharp.Messages.OrderRegisterMessage"/>.</param>
             <returns><see cref="T:StockSharp.Messages.ExecutionMessage"/>.</returns>
         </member>
         <member name="M:StockSharp.Messages.Extensions.CopyExtensionInfo(StockSharp.Messages.IExtendableEntity,StockSharp.Messages.IExtendableEntity)">
@@ -2037,6 +1997,34 @@
             </summary>
             <param name="messageType">The message type.</param>
             <returns><see langword="true"/> if the specified message type is derived from <see cref="T:StockSharp.Messages.CandleMessage"/>, otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Messages.Extensions.HasOrderInfo(StockSharp.Messages.ExecutionMessage)">
+            <summary>
+            Determines whether the specified message contains order information.
+            </summary>
+            <param name="message">The message.</param>
+            <returns><see langword="true"/> if the specified message contains order information, otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Messages.Extensions.HasTradeInfo(StockSharp.Messages.ExecutionMessage)">
+            <summary>
+            Determines whether the specified message contains trade information.
+            </summary>
+            <param name="message">The message.</param>
+            <returns><see langword="true"/> if the specified message contains trade information, otherwise, <see langword="false"/>.</returns>
+        </member>
+        <member name="M:StockSharp.Messages.Extensions.ToErrorMessage(System.String)">
+            <summary>
+            Convert error test message to <see cref="T:StockSharp.Messages.ErrorMessage"/> instance.
+            </summary>
+            <param name="description">Error test message.</param>
+            <returns><see cref="T:StockSharp.Messages.ErrorMessage"/> instance.</returns>
+        </member>
+        <member name="M:StockSharp.Messages.Extensions.ToErrorMessage(System.Exception)">
+            <summary>
+            Convert error info into <see cref="T:StockSharp.Messages.ErrorMessage"/>.
+            </summary>
+            <param name="error">Error info.</param>
+            <returns>Error message.</returns>
         </member>
         <member name="T:StockSharp.Messages.IExtendableEntity">
             <summary>
@@ -2123,6 +2111,11 @@
             <see cref="T:StockSharp.Messages.OrderStatusMessage"/> required to get orders and ow trades.
             </summary>
         </member>
+        <member name="P:StockSharp.Messages.IMessageAdapter.OrderCancelVolumeRequired">
+            <summary>
+            <see cref="P:StockSharp.Messages.OrderCancelMessage.Volume"/> required to cancel orders.
+            </summary>
+        </member>
         <member name="P:StockSharp.Messages.IMessageAdapter.AssociatedBoardCode">
             <summary>
             Board code for combined security.
@@ -2171,6 +2164,11 @@
         <member name="P:StockSharp.Messages.MessageAdapterWrapper.InnerAdapter">
             <summary>
             Underlying adapter.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.MessageAdapterWrapper.OwnInnerAdaper">
+            <summary>
+            Control <see cref="P:StockSharp.Messages.MessageAdapterWrapper.InnerAdapter"/> lifetime.
             </summary>
         </member>
         <member name="M:StockSharp.Messages.MessageAdapterWrapper.OnInnerAdapterNewOutMessage(StockSharp.Messages.Message)">
@@ -2510,6 +2508,11 @@
         <member name="P:StockSharp.Messages.MessageAdapter.OrderStatusRequired">
             <summary>
             <see cref="T:StockSharp.Messages.OrderStatusMessage"/> required to get orders and ow trades.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.MessageAdapter.OrderCancelVolumeRequired">
+            <summary>
+            <see cref="P:StockSharp.Messages.OrderCancelMessage.Volume"/> required to cancel orders.
             </summary>
         </member>
         <member name="P:StockSharp.Messages.MessageAdapter.IsSupportNativeSecurityLookup">
@@ -2990,11 +2993,6 @@
             Cancelling order id (as a string if the electronic board does not use a numeric representation of the identifiers).
             </summary>
         </member>
-        <member name="P:StockSharp.Messages.OrderCancelMessage.TransactionId">
-            <summary>
-            Order cancellation transaction id.
-            </summary>
-        </member>
         <member name="P:StockSharp.Messages.OrderCancelMessage.OrderTransactionId">
             <summary>
             Transaction ID cancellation order.
@@ -3014,6 +3012,12 @@
             <summary>
             Initializes a new instance of the <see cref="T:StockSharp.Messages.OrderCancelMessage"/>.
             </summary>
+        </member>
+        <member name="M:StockSharp.Messages.OrderCancelMessage.#ctor(StockSharp.Messages.MessageTypes)">
+            <summary>
+            Initialize <see cref="T:StockSharp.Messages.OrderCancelMessage"/>.
+            </summary>
+            <param name="type">Message type.</param>
         </member>
         <member name="M:StockSharp.Messages.OrderCancelMessage.Clone">
             <summary>
@@ -3053,11 +3057,6 @@
             The message containing the order group cancel filter.
             </summary>
         </member>
-        <member name="P:StockSharp.Messages.OrderGroupCancelMessage.TransactionId">
-            <summary>
-            Order cancellation transaction id.
-            </summary>
-        </member>
         <member name="P:StockSharp.Messages.OrderGroupCancelMessage.IsStop">
             <summary>
             <see langword="true" />, if cancel only a stop orders, <see langword="false" /> - if regular orders, <see langword="null" /> - both.
@@ -3090,6 +3089,11 @@
             A message containing info about the order.
             </summary>
         </member>
+        <member name="P:StockSharp.Messages.OrderMessage.TransactionId">
+            <summary>
+            Transaction ID.
+            </summary>
+        </member>
         <member name="P:StockSharp.Messages.OrderMessage.PortfolioName">
             <summary>
             Portfolio name, for which an order must be placed/cancelled.
@@ -3113,6 +3117,11 @@
         <member name="P:StockSharp.Messages.OrderMessage.ClientCode">
             <summary>
             Client code assigned by the broker.
+            </summary>
+        </member>
+        <member name="P:StockSharp.Messages.OrderMessage.Condition">
+            <summary>
+            Order condition (e.g., stop- and algo- orders parameters).
             </summary>
         </member>
         <member name="M:StockSharp.Messages.OrderMessage.#ctor(StockSharp.Messages.MessageTypes)">
@@ -3158,11 +3167,6 @@
             The message containing the information for the order registration.
             </summary>
         </member>
-        <member name="P:StockSharp.Messages.OrderRegisterMessage.TransactionId">
-            <summary>
-            Transaction ID.
-            </summary>
-        </member>
         <member name="P:StockSharp.Messages.OrderRegisterMessage.Price">
             <summary>
             Order price.
@@ -3195,11 +3199,6 @@
             <remarks>
             If the value is equal <see langword="null" /> or <see cref="F:System.DateTimeOffset.MaxValue"/>, order will be GTC (good til cancel). Or uses exact date.
             </remarks>
-        </member>
-        <member name="P:StockSharp.Messages.OrderRegisterMessage.Condition">
-            <summary>
-            Order condition (e.g., stop- and algo- orders parameters).
-            </summary>
         </member>
         <member name="P:StockSharp.Messages.OrderRegisterMessage.TimeInForce">
             <summary>
@@ -3397,26 +3396,6 @@
         <member name="T:StockSharp.Messages.OrderStatusMessage">
             <summary>
             A message requesting current registered orders and trades.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.OrderStatusMessage.TransactionId">
-            <summary>
-            Transaction ID.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.OrderStatusMessage.OrderId">
-            <summary>
-            The requested order id.
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.OrderStatusMessage.OrderStringId">
-            <summary>
-            The identifier of the requested order (as a string if the electronic board does not use a numeric representation of the identifiers).
-            </summary>
-        </member>
-        <member name="P:StockSharp.Messages.OrderStatusMessage.OrderTransactionId">
-            <summary>
-            Transaction ID of the requested order.
             </summary>
         </member>
         <member name="M:StockSharp.Messages.OrderStatusMessage.#ctor">
@@ -5462,6 +5441,18 @@
             </summary>
             <param name="u">Unit.</param>
             <returns>Opposite value.</returns>
+        </member>
+        <member name="M:StockSharp.Messages.Unit.Load(Ecng.Serialization.SettingsStorage)">
+            <summary>
+            Load settings.
+            </summary>
+            <param name="storage">Settings storage.</param>
+        </member>
+        <member name="M:StockSharp.Messages.Unit.Save(Ecng.Serialization.SettingsStorage)">
+            <summary>
+            Save settings.
+            </summary>
+            <param name="storage">Settings storage.</param>
         </member>
         <member name="T:StockSharp.Messages.UnitHelper">
             <summary>

@@ -89,6 +89,9 @@
     <Reference Include="StockSharp.Messages">
       <HintPath>References\StockSharp.Messages.dll</HintPath>
     </Reference>
+    <Reference Include="StockSharp.Plaza">
+      <HintPath>..\AlgoTools\References\StockSharp.Plaza.dll</HintPath>
+    </Reference>
     <Reference Include="StockSharp.Xaml, Version=4.1.19.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\StockSharp.Xaml.dll</HintPath>
